@@ -45,6 +45,10 @@ header {
     color: #FFFFFF;
 }
 
+.menu-logo:hover {
+    color: #FF2F28;
+}
+
 .menu .navbar .search-boton {
     position: relative;
     float: left;
@@ -111,6 +115,11 @@ header {
     background-color: #FF2F28;
     font-size: 20px;
     color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
+
+.btn-1:hover {
+    background-color: #FF5A54;
 }
 
 .btn-2 {
@@ -122,6 +131,11 @@ header {
     margin-top: 10px;
     margin-left: 110px;
     color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
+
+.btn-2:hover {
+    background-color: #FF5A54;
 }
 
 .movies {
@@ -159,6 +173,16 @@ hr {
     border-radius: 5px;
     z-index: 1000;
     display: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.box-1:hover,
+.box-2:hover,
+.box-3:hover,
+.box-4:hover,
+.box-5:hover {
+    transform: scale(1.05);
 }
 
 .box-1:nth-child(1),
