@@ -5,13 +5,13 @@ const Carreras = () => {
     if (opcion1 === "si") {
         alert(`Bienvenido a la cueva ${nombre}`);
         let opcion2;
-        do {
+        while (opcion2 !== "mapa" && opcion2 !== "un mapa"){
             opcion2 = prompt("¡Has encontrado un tesoro! Pero tiene contraseña... Deberás responder correctamente el siguiente acertijo: Tengo ciudades pero no tengo casas, tengo bosques pero no tengo árboles, y tengo ríos pero no tengo agua. ¿Qué soy?");
             opcion2 = opcion2.toLowerCase();
             if (opcion2 !== "mapa" && opcion2 !== "un mapa") {
                 alert("Respuesta incorrecta, vuelve a intentarlo");
             }
-        } while (opcion2 !== "mapa" && opcion2 !== "un mapa"); 
+        }
         alert("Respuesta correcta. ¡Has ganado 1000 monedas de plata y has salido victorioso!");
     }
     else if (opcion1 === "no") {
