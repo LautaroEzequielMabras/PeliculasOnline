@@ -2,6 +2,16 @@ const Carreras = () => {
     let nombre = prompt("Bienvenido a la aventura! ¿Cómo es tu nombre?");
     let opcion1 = prompt("¿Qué quieres hacer? ¿Aventurarte a la cueva o no?");
     opcion1 = opcion1.toLowerCase();
+    while (opcion1 !== "si") {
+        if (opcion1 === "no") {
+            alert("No te has aventurado a la cueva, vuelve cuando quieras");
+        }
+        else {
+            alert("Opción no válida");
+        }
+        opcion1 = prompt("¿Qué quieres hacer? ¿Aventurarte a la cueva o no?");
+        opcion1 = opcion1.toLowerCase();
+    }
     if (opcion1 === "si") {
         alert(`Bienvenido a la cueva ${nombre}`);
         let opcion2;
@@ -13,12 +23,6 @@ const Carreras = () => {
             }
         }
         alert("Respuesta correcta. ¡Has ganado 1000 monedas de plata y has salido victorioso!");
-    }
-    else if (opcion1 === "no") {
-        alert("No te has aventurado a la cueva, vuelve cuando quieras");
-    }
-    else {
-        alert("Opción no válida");
     }
 }
 
