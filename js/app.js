@@ -1,7 +1,7 @@
 const Carreras = () => {
     let nombre = prompt("Bienvenido a la aventura! ¿Cómo es tu nombre?");
     let opcion1 = prompt("¿Qué quieres hacer? ¿Aventurarte a la cueva o no?");
-    opcion1 = opcion1.toLowerCase(); // Debes asignar el resultado de toLowerCase() nuevamente a la variable opcion1
+    opcion1 = opcion1.toLowerCase();
     if (opcion1 === "si") {
         alert(`Bienvenido a la cueva ${nombre}`);
         let opcion2;
