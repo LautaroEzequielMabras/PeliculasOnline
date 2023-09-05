@@ -105,6 +105,52 @@ class Pelicula {
 
 const nuevaPelicula = new Pelicula();
 
+const mostrarMenu = () => {
+    const opcion = parseInt(prompt(`Seleccione una opción:
+    1. Eliminar duplicados en un array
+    2. Separar pares e impares en un array de números
+    3. FizzBuzz
+    4. Contar caracteres de un texto
+    5. Recortar texto
+    6. Comprobar si un número es primo
+    7. Aplicar descuento
+    8. Calcular edad
+    9. Salir`));
+
+    switch (opcion) {
+        case 1:
+            eliminarDuplicados();
+            break;
+        case 2:
+            separarParesImpares();
+            break;
+        case 3:
+            fizzBuzz();
+            break;
+        case 4:
+            contarCaracteres();
+            break;
+        case 5:
+            recortarTexto();
+            break;
+        case 6:
+            esPrimo();
+            break;
+        case 7:
+            aplicarDescuento();
+            break;
+        case 8:
+            calcularEdad();
+            break;
+        case 9:
+            alert('Saliendo del programa.');
+            break;
+        default:
+            alert('Opción no válida. Por favor, seleccione una opción válida.');
+            mostrarMenu();
+    }
+};
+
 const eliminarDuplicados = () => {
     const input = prompt('Ingrese un array de elementos separados por comas:');
     const array = input.split(',').map(item => item.trim());
@@ -113,8 +159,8 @@ const eliminarDuplicados = () => {
         alert(`Array sin duplicados: [${uniqueArray}]`);
     } else {
         alert('Error: El valor ingresado no es un array válido.');
-        eliminarDuplicados();
     }
+    mostrarMenu();
 };
 
 const separarParesImpares = () => {
@@ -126,8 +172,8 @@ const separarParesImpares = () => {
         alert(`Pares: [${pares}], Impares: [${impares}]`);
     } else {
         alert('Error: El valor ingresado no es un array numérico válido.');
-        separarParesImpares();
     }
+    mostrarMenu();
 };
 
 const fizzBuzz = () => {
@@ -147,11 +193,11 @@ const fizzBuzz = () => {
             }
             resultados.push(mensaje);
         }
-        console.table(resultados);
+        alert(`Resultados: ${resultados.join(', ')}`);
     } else {
         alert('Error: El valor ingresado no es un número válido.');
-        fizzBuzz();
     }
+    mostrarMenu();
 };
 
 const contarCaracteres = () => {
@@ -160,8 +206,8 @@ const contarCaracteres = () => {
         alert(`Número de caracteres: ${texto.length}`);
     } else {
         alert('Error: El valor ingresado no es una cadena de texto.');
-        contarCaracteres();
     }
+    mostrarMenu();
 };
 
 const recortarTexto = () => {
@@ -172,8 +218,8 @@ const recortarTexto = () => {
         alert(`Texto recortado: "${resultado}"`);
     } else {
         alert('Error: Los parámetros ingresados no son válidos.');
-        recortarTexto();
     }
+    mostrarMenu();
 };
 
 const esPrimo = () => {
@@ -188,8 +234,8 @@ const esPrimo = () => {
         alert('Es primo');
     } else {
         alert('Error: El valor ingresado no es un número válido o es menor o igual a 1.');
-        esPrimo();
     }
+    mostrarMenu();
 };
 
 const aplicarDescuento = () => {
@@ -198,11 +244,11 @@ const aplicarDescuento = () => {
     if (!isNaN(monto) && !isNaN(descuento) && monto >= 0 && descuento >= 0 && descuento <= 100) {
         const descuentoAplicado = monto * (descuento / 100);
         const montoConDescuento = monto - descuentoAplicado;
-        alert(`Monto con descuento: $${montoConDescuento}`);
+        alert(`Monto con descuento: $${montoConDescuento.toFixed(2)}`);
     } else {
         alert('Error: Los parámetros ingresados no son válidos.');
-        aplicarDescuento();
     }
+    mostrarMenu();
 };
 
 const calcularEdad = () => {
@@ -215,6 +261,8 @@ const calcularEdad = () => {
         alert(`Edad: ${añosPasados} años`);
     } else {
         alert('Error: El valor ingresado no es una fecha válida.');
-        calcularEdad();
     }
+    mostrarMenu();
 };
+
+mostrarMenu();
