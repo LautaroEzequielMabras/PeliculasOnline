@@ -1,27 +1,46 @@
 class Pelicula {
-    constructor(IMDB, titulo, director, añoDeEstreno, pais, generos, calificacion) {
-        this.IMDB = IMDB;
-        this.titulo = titulo;
-        this.director = director;
-        this.añoDeEstreno = añoDeEstreno;
-        this.pais = pais;
-        this.generos = generos;
-        this.calificacion = calificacion;
-        this.validacionId(IMDB);
-        this.validacionTitulo(titulo);
-        this.validacionDirector(director);
-        this.validacionAñoDeEstreno(añoDeEstreno);
-        this.validacionPais(pais);
-        this.validacionGenero(generos);
-        this.validacionCalificacion(calificacion);
+    constructor() {
+        this.IMDB = prompt('Ingrese el ID de la película (Debe cumplir lo siguiente: Debe comenzar con exactamente 2 letras (mayúsculas o minúsculas), luego, deben seguir con exactamente 7 dígitos. No se permite ningún otro carácter en la cadena. La longitud total de la cadena debe ser de 9 caracteres (2 letras + 7 dígitos). Por ejemplo "tt1234567")');
+        this.titulo = prompt('Ingrese el título:');
+        this.director = prompt('Ingrese el director:');
+        this.añoDeEstreno = parseInt(prompt('Ingrese el año de estreno:'));
+        this.pais = prompt('Ingrese el país de producción (separe los países con comas):').split(',');
+        this.generos = prompt('Ingrese los géneros de la película (Géneros aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary, Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western):').split(',');
+        this.calificacion = parseFloat(prompt('Ingrese la calificación:'));
 
+        while (true) {
+            try {
+                this.validacionId(this.IMDB);
+                this.validacionTitulo(this.titulo);
+                this.validacionDirector(this.director);
+                this.validacionAñoDeEstreno(this.añoDeEstreno);
+                this.validacionPais(this.pais);
+                this.validacionGenero(this.generos);
+                this.validacionCalificacion(this.calificacion);
+
+                const fichaTecnica = this.fichaTecnica();
+                alert(fichaTecnica);
+                break;
+            } catch (error) {
+                alert(error.message);
+                this.IMDB = prompt('Ingrese el ID de la película (Debe cumplir lo siguiente: Debe comenzar con exactamente 2 letras (mayúsculas o minúsculas), luego, deben seguir con exactamente 7 dígitos. No se permite ningún otro carácter en la cadena. La longitud total de la cadena debe ser de 9 caracteres (2 letras + 7 dígitos). Por ejemplo "tt1234567")');
+                this.titulo = prompt('Ingrese el título:');
+                this.director = prompt('Ingrese el director:');
+                this.añoDeEstreno = parseInt(prompt('Ingrese el año de estreno:'));
+                this.pais = prompt('Ingrese el país de producción (separe los países con comas):').split(',');
+                this.generos = prompt('Ingrese los géneros de la película (Géneros aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary, Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western):').split(',');
+                this.calificacion = parseFloat(prompt('Ingrese la calificación:'));
+            }
+        }
     }
+
     validacionId(IMDB) {
         let regex = /^[A-Za-z]{2}[0-9]{7}$/;
         if (!regex.test(IMDB)) {
-            throw new Error('El ID de IMDB no cumple con el formato requerido.')
+            throw new Error('El ID de IMDB no cumple con el formato requerido.');
         }
     }
+
     validacionTitulo(titulo) {
         if (titulo.length === 0) {
             throw new Error('El título no puede estar vacío.');
@@ -30,6 +49,7 @@ class Pelicula {
             throw new Error('El título no puede exceder los 100 caracteres.');
         }
     }
+
     validacionDirector(director) {
         if (director.length === 0) {
             throw new Error('El director no puede estar vacío.');
@@ -38,19 +58,23 @@ class Pelicula {
             throw new Error('El director no puede exceder los 50 caracteres.');
         }
     }
+
     validacionAñoDeEstreno(añoDeEstreno) {
-        if (typeof añoDeEstreno !== "number" || añoDeEstreno.toString().length !== 4) {
-            throw new Error('El año de estreno no cumple existe.');
+        if (isNaN(añoDeEstreno) || añoDeEstreno.toString().length !== 4) {
+            throw new Error('El año de estreno no es válido.');
         }
     }
+
     validacionPais(pais) {
-        if (!Array.isArray(pais)) {
-            throw new Error('El país debe ser un array.');
+        if (!Array.isArray(pais) || pais.length === 0) {
+            throw new Error('Debe ingresar al menos un país.');
         }
     }
+
     get generosAceptado() {
         return "Los géneros aceptados son: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary, Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western";
     }
+
     validacionGenero(generos) {
         const generosAceptados = [
             "Action", "Adult", "Adventure", "Animation", "Biography", "Comedy",
@@ -60,119 +84,137 @@ class Pelicula {
             "Talk-Show", "Thriller", "War", "Western"
         ];
 
-        generos.forEach((genero) => {
-            let lowerGenero = genero.toLowerCase();
+        for (let genero of generos) {
+            let lowerGenero = genero.trim().toLowerCase();
             if (!generosAceptados.some((aceptado) => aceptado.toLowerCase() === lowerGenero)) {
                 throw new Error(`El género "${genero}" no es válido. ${this.generosAceptados}`);
             }
-        });
-    }
-    validacionCalificacion(calificacion) {
-        let regex = /^([1-9]|10)(\.\d+)?$/;
-        if (!regex.test(calificacion)) {
-            throw new Error(`La calificacion "${calificacion}" no es válida.`);
         }
     }
-    fichaTecnica() {
-        return `Datos sobre la película:\nID: ${this.IMDB}\nTítulo: ${this.titulo}\nDirector: ${this.director}\nAño de estreno: ${this.añoDeEstreno}\nPaís de producción: ${this.pais}\nGénero de la película: ${this.generos}\nCalificación: ${this.calificacion}`;
+
+    validacionCalificacion(calificacion) {
+        if (isNaN(calificacion) || calificacion < 1 || calificacion > 10) {
+            throw new Error(`La calificación "${calificacion}" no es válida.`);
+        }
     }
 
+    fichaTecnica() {
+        return `Datos sobre la película:\nID: ${this.IMDB}\nTítulo: ${this.titulo}\nDirector: ${this.director}\nAño de estreno: ${this.añoDeEstreno}\nPaís de producción: ${this.pais.join(', ')}\nGénero de la película: ${this.generos.join(', ')}\nCalificación: ${this.calificacion}`;
+    }
 }
 
-const scaryMovie = new Pelicula("tt1234567", "Scary Movie", "Keenen Ivory Wayans", 2000, ["Estados Unidos"], ["Comedy"], 7.9);
-console.log(scaryMovie.fichaTecnica());
+const nuevaPelicula = new Pelicula();
 
-const eliminarDuplicados = (array) => {
+const eliminarDuplicados = () => {
+    const input = prompt('Ingrese un array de elementos separados por comas:');
+    const array = input.split(',').map(item => item.trim());
     if (Array.isArray(array)) {
-        return [...new Set(array)];
+        const uniqueArray = [...new Set(array)];
+        alert(`Array sin duplicados: [${uniqueArray}]`);
     } else {
-        return 'Error: El valor ingresado no es un array válido.';
+        alert('Error: El valor ingresado no es un array válido.');
+        eliminarDuplicados();
     }
 };
 
-console.log(eliminarDuplicados(["x", 10, "x", 2, "10", 10, true, true]));
-
-const separarParesImpares = (array) => {
+const separarParesImpares = () => {
+    const input = prompt('Ingrese un array de números separados por comas:');
+    const array = input.split(',').map(item => Number(item.trim()));
     if (Array.isArray(array) && array.every(num => typeof num === 'number')) {
         const pares = array.filter(num => num % 2 === 0);
         const impares = array.filter(num => num % 2 !== 0);
-        return { pares, impares };
+        alert(`Pares: [${pares}], Impares: [${impares}]`);
     } else {
-        return 'Error: El valor ingresado no es un array numérico válido.';
+        alert('Error: El valor ingresado no es un array numérico válido.');
+        separarParesImpares();
     }
 };
 
-const fizzBuzz = numero => {
-    let resultados = [];
-    for (let i = 1; i <= numero; i++) {
-        let mensaje = "";
-        if (i % 3 === 0) {
-            mensaje += "Fizz";
+const fizzBuzz = () => {
+    const numero = parseInt(prompt('Ingrese un número:'));
+    if (!isNaN(numero)) {
+        let resultados = [];
+        for (let i = 1; i <= numero; i++) {
+            let mensaje = "";
+            if (i % 3 === 0) {
+                mensaje += "Fizz";
+            }
+            if (i % 5 === 0) {
+                mensaje += "Buzz";
+            }
+            if (mensaje === "") {
+                mensaje = i;
+            }
+            resultados.push(mensaje);
         }
-        if (i % 5 === 0) {
-            mensaje += "Buzz";
-        }
-        if (mensaje === "") {
-            mensaje = i;
-        }
-        resultados.push(mensaje);
+        console.table(resultados);
+    } else {
+        alert('Error: El valor ingresado no es un número válido.');
+        fizzBuzz();
     }
-    return resultados;
 };
 
-console.table(fizzBuzz(100));
-
-const contarCaracteres = (texto) => {
+const contarCaracteres = () => {
+    const texto = prompt('Ingrese un texto:');
     if (typeof texto === 'string') {
-        return texto.length;
+        alert(`Número de caracteres: ${texto.length}`);
     } else {
-        return 'Error: El valor ingresado no es una cadena de texto.';
+        alert('Error: El valor ingresado no es una cadena de texto.');
+        contarCaracteres();
     }
 };
 
-console.log(contarCaracteres("Hola Mundo"));
-
-const recortarTexto = (texto, longitud) => {
-    if (typeof texto === 'string' && typeof longitud === 'number') {
-        return texto.slice(0, longitud);
+const recortarTexto = () => {
+    const texto = prompt('Ingrese un texto:');
+    const longitud = parseInt(prompt('Ingrese la longitud a la que desea recortar el texto:'));
+    if (typeof texto === 'string' && !isNaN(longitud)) {
+        const resultado = texto.slice(0, longitud);
+        alert(`Texto recortado: "${resultado}"`);
     } else {
-        return 'Error: Los parámetros ingresados no son válidos.';
+        alert('Error: Los parámetros ingresados no son válidos.');
+        recortarTexto();
     }
 };
 
-console.log(recortarTexto("Hola Mundo", 4));
-
-const esPrimo = (numero) => {
-    if (typeof numero === 'number' && numero > 1) {
+const esPrimo = () => {
+    const numero = parseInt(prompt('Ingrese un número:'));
+    if (!isNaN(numero) && numero > 1) {
         for (let i = 2; i < numero; i++) {
             if (numero % i === 0) {
-                return false;
+                alert('No es primo');
+                return;
             }
         }
-        return true;
+        alert('Es primo');
     } else {
-        return 'Error: El valor ingresado no es un número válido.';
+        alert('Error: El valor ingresado no es un número válido o es menor o igual a 1.');
+        esPrimo();
     }
 };
 
-console.log(esPrimo(7));
-
-const aplicarDescuento = (monto, descuento) => {
-    if (typeof monto === 'number' && typeof descuento === 'number' && monto >= 0 && descuento >= 0 && descuento <= 100) {
+const aplicarDescuento = () => {
+    const monto = parseFloat(prompt('Ingrese el monto:'));
+    const descuento = parseFloat(prompt('Ingrese el descuento en porcentaje:'));
+    if (!isNaN(monto) && !isNaN(descuento) && monto >= 0 && descuento >= 0 && descuento <= 100) {
         const descuentoAplicado = monto * (descuento / 100);
-        return monto - descuentoAplicado;
+        const montoConDescuento = monto - descuentoAplicado;
+        alert(`Monto con descuento: $${montoConDescuento}`);
     } else {
-        return 'Error: Los parámetros ingresados no son válidos.';
+        alert('Error: Los parámetros ingresados no son válidos.');
+        aplicarDescuento();
     }
 };
 
-const calcularEdad = (fecha) => {
+const calcularEdad = () => {
+    const fechaString = prompt('Ingrese una fecha en formato yyyy-mm-dd:');
+    const fecha = new Date(fechaString);
     if (fecha instanceof Date && !isNaN(fecha)) {
         const hoy = new Date();
         const diferencia = hoy.getTime() - fecha.getTime();
         const añosPasados = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365));
-        return `${añosPasados} años`;
+        alert(`Edad: ${añosPasados} años`);
     } else {
-        return 'Error: El valor ingresado no es una fecha válida.';
+        alert('Error: El valor ingresado no es una fecha válida.');
+        calcularEdad();
     }
 };
