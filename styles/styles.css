@@ -20,7 +20,7 @@ body {
     margin: 0 auto;
 }
 
-header {
+.header {
     background-image: url(../img/bg.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -144,7 +144,7 @@ header {
     flex-direction: column;
 }
 
-h2 {
+.peliculas_inicio {
     font-size: 35px;
     margin-bottom: 20px;
 }
@@ -227,6 +227,7 @@ hr {
     border: 1px solid #FF2F28;
     border-radius: 15px;
     color: #FF2F28;
+    background-color: #030303;
     font-size: 16px;
     cursor: pointer;
     align-self: center;
@@ -306,6 +307,111 @@ hr {
     color: #FFFFFF;
 }
 
+/* login */
+.body-login {
+    margin: 0;
+    padding: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    background-image: url(../img/fondo.jpg);
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container_login {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+}
+
+.login-box_login {
+    flex: 1;
+    max-width: 400px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.userData {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.title_login {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.label_login {
+    text-align: left;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 20px;
+}
+
+.input_login[type="text"],
+.input_login[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 2px solid red;
+    border-radius: 6px;
+    background-color: black;
+    color: red;
+    font-size: 16px;
+}
+
+.btn_login {
+    background-color: red;
+    color: black;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn_login:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.userData h2 {
+    color: red;
+    font-size: 24px;
+}
+
+.userData p {
+    color: red;
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#deleteButton {
+    background-color: red;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#deleteButton:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
 @media (max-width: 990px) {
     .menu {
         padding: 20px;
@@ -356,5 +462,21 @@ hr {
 
     .movies {
         padding: 30px;
+    }
+}
+
+/*login*/
+@media screen and (max-width: 600px) {
+    .container_login {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .input_login {
+        margin-bottom: 10px;
+    }
+
+    .btn_login {
+        padding: 12px 20px;
     }
 }

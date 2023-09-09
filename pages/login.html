@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>Login</title>
+</head>
+
+<body class="body-login">
+    <header>
+        <div class="menu container">
+            <a href="../index.html" class="menu-logo">MovieMania</a>
+            <input type="checkbox" id="menu" />
+            <label for="menu"><img src="../img/menu.png" class="menu-icono" alt="menu"></label>
+            <nav class="navbar">
+                <ul>
+                    <li class="search-boton"><a href="#">Peliculas</a></li>
+                    <li class="search-boton"><a href="../index.html">Inicio</a></li>
+                    <li class="search-boton"><a href="#">Series</a></li>
+                </ul>
+            </nav>
+            <a href="./login.html" class="btn-1">Login</a>
+        </div>
+    </header>
+
+    <body class="body-login">
+        <main class="main_login">
+            <div class="container_login">
+                <div class="login-box_login">
+                    <h2 class="title_login">Login</h2>
+                    <form id="login-form_login">
+                        <label for="username" class="label_login">Usuario</label>
+                        <input class="input_login" type="text" id="username" name="username" required>
+                        <label for="password" class="label_login">Contraseña</label>
+                        <input class="input_login" type="password" id="password" name="password" required>
+                        <button class="btn_login" type="submit">Iniciar Sesión</button>
+                    </form>
+                </div>
+                <div class="userData">
+                    <h2>Datos almacenados:</h2>
+                    <p>Usuario: <span id="storedUsername"></span></p>
+                    <p>Contraseña: <span id="storedPassword"></span></p>
+                    <button id="deleteButton">Borrar Datos</button>
+                </div>
+            </div>
+        </main>
+        <script src="../js/app.js" defer></script>
+        <script src="../js/storage.js" defer></script>
+    </body>
+
+</html>
