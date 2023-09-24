@@ -35,58 +35,24 @@ if (window.location.pathname.includes('index.html')) {
         });
     });
 }
+
 if (window.location.pathname.includes('peliculas.html')) {
-    const peliculas = [
-        {
-            nombre: "Eternals",
-            foto: "eternals",
-            id: "Eternals",
-            puntajes: [7.5],
-        },
-        {
-            nombre: "BlackWidow",
-            foto: "blackwidow",
-            id: "Black Widow",
-            puntajes: [8],
-        },
-        {
-            nombre: "Spiderman",
-            foto: "spiderman",
-            id: "Spiderman",
-            puntajes: [6],
-        },
-        {
-            nombre: "Thor",
-            foto: "thor",
-            id: "Thor",
-            puntajes: [9],
-        },
-        {
-            nombre: "Batman",
-            foto: "batman",
-            id: "Batman",
-            puntajes: [10],
-        },
-        {
-            nombre: "MoonKnight",
-            foto: "moonknight",
-            id: "MoonKnight",
-            puntajes: [6],
-        }
-    ];
+    fetch('../js/peliculas.json')
+        .then((response) => response.json())
+        .then((peliculas) => {
+            console.log("todo ok");
+            function calcularPromedio(puntajes) {
+                const sum = puntajes.reduce((actual, antes) => actual + antes, 0);
+                const promedio = Math.ceil(sum / puntajes.length);
+                return promedio;
+            }
 
-    function calcularPromedio(puntajes) {
-        const sum = puntajes.reduce((actual, antes) => actual + antes, 0);
-        const promedio = Math.ceil(sum / puntajes.length);
-        return promedio;
-    }
-
-function mostrarPeliculas() {
-    const peliculasContainer = document.getElementById('mejores-peliculas');
-    peliculas.forEach((pelicula) => {
-        const peliculaElement = document.createElement('div');
-        peliculaElement.classList.add('pelicula');
-        peliculaElement.innerHTML = `
+            function mostrarPeliculas() {
+                const peliculasContainer = document.getElementById('mejores-peliculas');
+                peliculas.forEach((pelicula) => {
+                    const peliculaElement = document.createElement('div');
+                    peliculaElement.classList.add('pelicula');
+                    peliculaElement.innerHTML = `
             <img src="../img/${pelicula.foto}.jpg" class="pelicula-imagen">
             <h3 class="pelicula-titulo">${pelicula.id}</h3>
             <form>
@@ -100,32 +66,36 @@ function mostrarPeliculas() {
             </div>
         `;
 
-        peliculasContainer.appendChild(peliculaElement);
-    });
-}
-    document.addEventListener('DOMContentLoaded', () => {
-        mostrarPeliculas();
-        const agregarPuntuacionButtons = document.querySelectorAll('.agregar-puntuacion');
+                    peliculasContainer.appendChild(peliculaElement);
+                });
+            }
+            
+                mostrarPeliculas();
+                const agregarPuntuacionButtons = document.querySelectorAll('.agregar-puntuacion');
 
-        agregarPuntuacionButtons.forEach((agregarPuntuacionButton, index) => {
-            agregarPuntuacionButton.addEventListener('click', () => {
-                const puntuacionInput = document.getElementById(peliculas[index].nombre);
+                agregarPuntuacionButtons.forEach((agregarPuntuacionButton, index) => {
+                    agregarPuntuacionButton.addEventListener('click', () => {
+                        const puntuacionInput = document.getElementById(peliculas[index].nombre);
 
-                const puntuacion = parseFloat(puntuacionInput.value);
-                if (!isNaN(puntuacion) && puntuacion >= 1 && puntuacion <= 10) {
-                    peliculas[index].puntajes.push(puntuacion);
-                    alert(`Puntuación de ${puntuacion} agregada para ${peliculas[index].nombre}!`);
-                    puntuacionInput.value = '';
-                    const elementoConId = document.querySelector(`#${peliculas[index].nombre}`);
-                    const elementoPelicula = elementoConId.closest('.pelicula');
-                    const puntajeElemento = elementoPelicula.querySelector('.puntaje');
-                    puntajeElemento.textContent = `${calcularPromedio(peliculas[index].puntajes)}`;
-                } else {
-                    alert('Por favor, ingresa una puntuación válida entre 1 y 10.');
-                }
-            });
+                        const puntuacion = parseFloat(puntuacionInput.value);
+                        if (!isNaN(puntuacion) && puntuacion >= 1 && puntuacion <= 10) {
+                            peliculas[index].puntajes.push(puntuacion);
+                            alert(`Puntuación de ${puntuacion} agregada para ${peliculas[index].nombre}!`);
+                            puntuacionInput.value = '';
+                            const elementoConId = document.querySelector(`#${peliculas[index].nombre}`);
+                            const elementoPelicula = elementoConId.closest('.pelicula');
+                            const puntajeElemento = elementoPelicula.querySelector('.puntaje');
+                            puntajeElemento.textContent = `${calcularPromedio(peliculas[index].puntajes)}`;
+                        } else {
+                            alert('Por favor, ingresa una puntuación válida entre 1 y 10.');
+                        }
+                    });
+                });
+            
+        })
+        .catch((error) => {
+            console.error('Error al cargar los datos:', error);
         });
-    });
 }
 
 if (window.location.pathname.includes('juego.html')) {
@@ -185,9 +155,9 @@ if (window.location.pathname.includes('juego.html')) {
     cajaJuego.addEventListener('click', () => {
         cajaJuego.style.display = 'none';
         mostrarCajaAleatoria();
-        score++; 
-        puntaje.textContent = score; 
+        score++;
+        puntaje.textContent = score;
     });
-    
+
     juego();
 }

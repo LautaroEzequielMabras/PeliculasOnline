@@ -1,0 +1,38 @@
+[
+    {
+        "nombre": "Eternals",
+        "foto": "eternals",
+        "id": "Eternals",
+        "puntajes": [7.5]
+    },
+    {
+        "nombre": "BlackWidow",
+        "foto": "blackwidow",
+        "id": "Black Widow",
+        "puntajes": [8]
+    },
+    {
+        "nombre": "Spiderman",
+        "foto": "spiderman",
+        "id": "Spiderman",
+        "puntajes": [6]
+    },
+    {
+        "nombre": "Thor",
+        "foto": "thor",
+        "id": "Thor",
+        "puntajes": [9]
+    },
+    {
+        "nombre": "Batman",
+        "foto": "batman",
+        "id": "Batman",
+        "puntajes": [10]
+    },
+    {
+        "nombre": "MoonKnight",
+        "foto": "moonknight",
+        "id": "MoonKnight",
+        "puntajes": [6]
+    }
+]
